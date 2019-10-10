@@ -1,0 +1,116 @@
+﻿@model CIS174_TestCoreApp.Models.Assgn7ViewModel
+@{
+    ViewData["Title"] = "Assgn7";
+}
+<environment include="Testing.Staging">
+    <div class="warning">You are in a testing Env</div>
+</environment>
+<h2>Assignment 7 </h2>
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.FirstName)
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(m => m.FirstName)
+                </div>
+                <div class="pull-right col-md-8 text-danger">
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.LastName)
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(m => m.LastName)
+                </div>
+                <div class="pull-right col-md-8 text-danger">
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.Age)
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(m => m.Age)
+                </div>
+                <div class="pull-right col-md-8 text-danger">
+                    @Html.ValidationMessageFor(m => m.Age)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(m => m.DOB)
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(m => m.DOB)
+                </div>
+                <div class="pull-right col-md-8 text-danger">
+                    @Html.ValidationMessageFor(m => m.DOB)
+                </div>
+            </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(m => m.Email)
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(m => m.Email)
+                    </div>
+                    <div class="pull-right col-md-8 text-danger">
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+
+                
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Passwd)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(m => m.Passwd)
+                        </div>
+                        <div class="pull-right col-md-8 text-danger">
+                            @Html.ValidationMessageFor(m => m.Passwd)
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.ConfirmPasswd)
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(m => m.ConfirmPasswd)
+                        </div>
+                        <div class="pull-right col-md-8 text-danger">
+                            @Html.ValidationMessageFor(m => m.ConfirmPasswd)
+                        </div>
+                    </div>
+           
+
+ 
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Country)
+                        </div>
+                        <select asp-for="Country"
+                                asp-items="Model.Items"></select>
+                        <div class="pull-right col-md-8 text-danger">
+                            @Html.ValidationMessageFor(m => m.Country)
+                        </div>
+                    </div>
+            </div>
+     </div>   
+        <button class="btn btn-primary" type="submit">Create</button>
+</form>
