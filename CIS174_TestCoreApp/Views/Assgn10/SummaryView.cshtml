@@ -1,0 +1,31 @@
+﻿@model CIS174_TestCoreApp.Models.Ch10SummaryModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Name</th>
+                <th colspan="2">Number of accomplishments</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var person in Model.Summary_List)
+            {
+                
+                  @person.Summary_Name
+                  @person.Summary_No_Accompliments
+
+            } 
+       </tbody>
+    </table>
+
+
+</div>
+
