@@ -10,6 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Web.Http;
+using Microsoft.EntityFrameworkCore;
+using CIS174_TestCoreApp.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using CIS174_TestCoreApp.Entity;
 
 namespace CIS174_TestCoreApp
 {
@@ -33,6 +38,16 @@ namespace CIS174_TestCoreApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<IPersonService, PersonService>();
+           
+            services.AddDbContext<Assgn10Context>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddIdentity<ApplicationUser, IdentityRole>( options =>
+                    options.Password.RequiredLength = 10)
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
+     //       services.AddTransient<Services.IEmailSender, AuthMessageSender>();
+     //       services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddXmlSerializerFormatters();
@@ -47,16 +62,19 @@ namespace CIS174_TestCoreApp
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(" / Home/Error");
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseHttpsRedirection();
+           
             app.UseCookiePolicy();
-            
+
             app.UseMvc(routes =>
             {
+                routes.MapRoute("Assgn10", "{controller}/{action}/{id?}",
+                          new {controller ="Person", action ="Create" , id =""});
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
@@ -69,6 +87,8 @@ namespace CIS174_TestCoreApp
                 });
 
             });
+
         }
     }
+    
 }
