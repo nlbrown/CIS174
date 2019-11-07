@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Web.Http;
+using Microsoft.EntityFrameworkCore;
+using CIS174_TestCoreApp.Services;
 
 namespace CIS174_TestCoreApp
 {
@@ -32,8 +34,12 @@ namespace CIS174_TestCoreApp
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
+            services.AddScoped<Assgn10Context>();
+            services.AddScoped<Ch10PeopleService>();
+            var connectionString = @"Server=tcp:cis174demo.database.windows.net,1433;Initial Catalog=CIS174;Persist Security Info=False;User ID=nlbrown;Password=Feedbag1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            services.AddDbContext<Assgn10Context>(options => options.UseSqlServer(connectionString));
+           // services.AddDbContext<Assgn10Context>();
+           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddXmlSerializerFormatters();
         }
@@ -47,14 +53,14 @@ namespace CIS174_TestCoreApp
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(" / Home/Error");
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -69,6 +75,8 @@ namespace CIS174_TestCoreApp
                 });
 
             });
+
         }
     }
+    
 }
